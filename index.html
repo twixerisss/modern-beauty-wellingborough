@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Beauty Wellingborough | Beauty Salon & Nail Bar</title>
+    <meta name="description" content="Modern Beauty Wellingborough - Your local beauty destination on Midland Road. Nails, brows, LVL lashes, aesthetics, facials, and waxing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E91E63;
+            --primary-light: #F06292;
+            --primary-dark: #C2185B;
+            --bg: #0a0a0a;
+            --bg-light: #111111;
+            --bg-card: #161616;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-dim: #666666;
+            --border: #222222;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+
+        a { text-decoration: none; color: inherit; }
+
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+        nav .container {
+            display: flex; align-items: center; justify-content: space-between;
+            height: 72px;
+        }
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem; font-weight: 700;
+        }
+        .nav-logo span { color: var(--primary); }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta {
+            background: var(--primary); color: #fff; padding: 10px 24px;
+            border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(233,30,99,0.3); }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px; cursor: pointer;
+            background: none; border: none; padding: 4px;
+        }
+        .hamburger span {
+            width: 24px; height: 2px; background: var(--text);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* MOBILE NAV */
+        .mobile-nav {
+            display: none; position: fixed; top: 72px; left: 0; right: 0;
+            background: rgba(10,10,10,0.98); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 24px; z-index: 999;
+        }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a {
+            display: block; padding: 12px 0; font-size: 1.1rem;
+            color: var(--text-muted); border-bottom: 1px solid var(--border);
+        }
+        .mobile-nav a:last-child { border: none; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden; padding-top: 72px;
+        }
+        .hero-glow {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(233,30,99,0.15) 0%, transparent 70%);
+            filter: blur(80px); pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 2; text-align: center; width: 100%; }
+        .hero-badge {
+            display: inline-block; padding: 8px 20px;
+            background: rgba(233,30,99,0.1); border: 1px solid rgba(233,30,99,0.3);
+            border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+            color: var(--primary-light); margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem); font-weight: 700;
+            line-height: 1.05; margin-bottom: 24px;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.2rem; color: var(--text-muted);
+            max-width: 560px; margin: 0 auto 36px;
+        }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            background: var(--primary); color: #fff; padding: 14px 32px;
+            border-radius: 10px; font-weight: 600; font-size: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233,30,99,0.3); }
+        .btn-secondary {
+            background: transparent; color: var(--text); padding: 14px 32px;
+            border-radius: 10px; font-weight: 600; font-size: 1rem;
+            border: 1px solid var(--border); transition: border-color 0.3s; cursor: pointer;
+        }
+        .btn-secondary:hover { border-color: var(--primary); }
+
+        /* STATS */
+        .stats {
+            padding: 60px 0; border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border); background: var(--bg-light);
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 2.5rem; font-weight: 700; color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .stat-item p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* SECTIONS */
+        section { padding: 100px 0; }
+        .section-label {
+            font-size: 0.85rem; font-weight: 600; color: var(--primary);
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 20px;
+        }
+        .section-desc {
+            color: var(--text-muted); font-size: 1.1rem; max-width: 600px;
+            margin-bottom: 48px;
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            align-items: center;
+        }
+        .about-image {
+            border-radius: 16px; overflow: hidden; aspect-ratio: 4/3;
+            position: relative;
+        }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; }
+        .about-image::after {
+            content: ''; position: absolute; inset: 0;
+            border: 1px solid rgba(233,30,99,0.2); border-radius: 16px;
+        }
+        .about-text .section-desc { margin-bottom: 24px; }
+        .about-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .about-features li {
+            display: flex; align-items: center; gap: 12px;
+            color: var(--text-muted); font-size: 0.95rem;
+        }
+        .about-features li::before {
+            content: ''; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--primary); flex-shrink: 0;
+        }
+
+        /* SERVICES */
+        .services { background: var(--bg-light); }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .service-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 36px; transition: transform 0.3s, border-color 0.3s;
+        }
+        .service-card:hover { transform: translateY(-4px); border-color: var(--primary); }
+        .service-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: rgba(233,30,99,0.1); display: flex; align-items: center;
+            justify-content: center; font-size: 1.4rem; margin-bottom: 20px;
+        }
+        .service-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .service-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
+        .service-price { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
+
+        /* GALLERY */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+        }
+        .gallery-item {
+            border-radius: 12px; overflow: hidden; aspect-ratio: 1;
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: 1; }
+
+        /* REVIEWS */
+        .reviews { background: var(--bg-light); }
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .review-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 32px;
+        }
+        .review-stars { color: #F1C40F; font-size: 1.1rem; margin-bottom: 16px; }
+        .review-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; font-style: italic; }
+        .review-author { font-weight: 600; font-size: 0.9rem; }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+        }
+        .contact-info { display: flex; flex-direction: column; gap: 24px; }
+        .contact-item { display: flex; gap: 16px; }
+        .contact-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: rgba(233,30,99,0.1); display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+        }
+        .contact-item h4 { font-size: 1rem; margin-bottom: 4px; }
+        .contact-item p { color: var(--text-muted); font-size: 0.9rem; }
+        .map-container {
+            border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+            aspect-ratio: 16/12;
+        }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+
+        /* CTA */
+        .cta {
+            background: var(--bg-light); text-align: center; padding: 100px 0;
+            position: relative; overflow: hidden;
+        }
+        .cta-glow {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(233,30,99,0.1) 0%, transparent 70%);
+            filter: blur(60px); pointer-events: none;
+        }
+        .cta h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; position: relative; }
+        .cta p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 36px; position: relative; }
+
+        /* FOOTER */
+        footer {
+            padding: 48px 0; border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        footer p { color: var(--text-dim); font-size: 0.85rem; }
+        footer a { color: var(--primary); transition: color 0.3s; }
+        footer a:hover { color: var(--primary-light); }
+        .footer-socials { display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; }
+        .footer-socials a {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.3s;
+        }
+        .footer-socials a:hover { border-color: var(--primary); }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .nav-links, .nav-cta { display: none; }
+            .hamburger { display: flex; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:first-child { grid-column: span 2; }
+            .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+        }
+        @media (max-width: 600px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item:first-child { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="container">
+        <a href="#" class="nav-logo">Modern<span>Beauty</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="tel:07813588368" class="nav-cta">Call Now</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:07813588368">Call Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">&#9733; 5-Star Rated on Booksy</div>
+            <h1>Modern Beauty For<br><span class="gradient">Modern You</span></h1>
+            <p>Your premier beauty salon and nail bar in Wellingborough. Nails, brows, lashes, facials and more.</p>
+            <div class="hero-buttons">
+                <a href="tel:07813588368" class="btn-primary">Book Now</a>
+                <a href="#services" class="btn-secondary">Our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item fade-in">
+                <h3>5-Star</h3>
+                <p>Rating on Booksy</p>
+            </div>
+            <div class="stat-item fade-in">
+                <h3>100s</h3>
+                <p>Happy Clients</p>
+            </div>
+            <div class="stat-item fade-in">
+                <h3>Expert</h3>
+                <p>Beauticians</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image fade-in">
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" alt="Modern Beauty Wellingborough Salon" loading="lazy">
+            </div>
+            <div class="about-text fade-in">
+                <p class="section-label">About Us</p>
+                <h2 class="section-title">Your Local Beauty Destination</h2>
+                <p class="section-desc">Your local beauty destination on Midland Road. Specialising in nails, brows, LVL lashes, aesthetics, facials, and waxing. Book online via Booksy for the ultimate pamper experience.</p>
+                <ul class="about-features">
+                    <li>Professional nail treatments &amp; art</li>
+                    <li>Brow lamination &amp; LVL lash lifts</li>
+                    <li>Luxury facials &amp; skin treatments</li>
+                    <li>Full body waxing services</li>
+                    <li>Book easily via Booksy</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+    <div class="container">
+        <p class="section-label">Our Services</p>
+        <h2 class="section-title">Treatments We Offer</h2>
+        <p class="section-desc">From nails to facials, we have everything you need to look and feel your best.</p>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">&#128133;</div>
+                <h3>Gel Manicure</h3>
+                <p>Beautiful, long-lasting gel nails with a flawless finish.</p>
+                <span class="service-price">From &pound;20</span>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">&#128135;</div>
+                <h3>Gel Pedicure</h3>
+                <p>Treat your feet to a luxurious gel pedicure experience.</p>
+                <span class="service-price">From &pound;25</span>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">&#10024;</div>
+                <h3>Brow Lamination</h3>
+                <p>Perfectly shaped, fluffy brows that frame your face beautifully.</p>
+                <span class="service-price">From &pound;25</span>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">&#128065;</div>
+                <h3>LVL Lash Lift</h3>
+                <p>Natural-looking lifted lashes without extensions.</p>
+                <span class="service-price">From &pound;30</span>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">&#129526;</div>
+                <h3>Facial Treatment</h3>
+                <p>Rejuvenating facials tailored to your skin type and needs.</p>
+                <span class="service-price">From &pound;35</span>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">&#127800;</div>
+                <h3>Full Body Wax</h3>
+                <p>Smooth, professional waxing for silky, hair-free skin.</p>
+                <span class="service-price">From &pound;40</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <div class="container">
+        <p class="section-label">Gallery</p>
+        <h2 class="section-title">Our Work</h2>
+        <p class="section-desc">A glimpse into the Modern Beauty experience.</p>
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" alt="Beauty salon interior" loading="lazy">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800" alt="Professional nail treatment" loading="lazy">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800" alt="Beauty treatment" loading="lazy">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800" alt="Spa treatment" loading="lazy">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800" alt="Beauty experience" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews">
+    <div class="container">
+        <p class="section-label">Reviews</p>
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-desc">Don't just take our word for it.</p>
+        <div class="reviews-grid">
+            <div class="review-card fade-in">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Amazing nails every single time! The attention to detail is incredible. I won't go anywhere else now."</p>
+                <span class="review-author">Sophie M.</span>
+            </div>
+            <div class="review-card fade-in">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"Such a relaxing experience from start to finish. The salon is beautiful and the treatments are top notch."</p>
+                <span class="review-author">Emma L.</span>
+            </div>
+            <div class="review-card fade-in">
+                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p>"The friendliest team in Wellingborough! Always feel so welcome and leave feeling like a million pounds."</p>
+                <span class="review-author">Rachel K.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <p class="section-label">Contact &amp; Hours</p>
+        <h2 class="section-title">Visit Us</h2>
+        <p class="section-desc">We'd love to see you at our Midland Road salon.</p>
+        <div class="contact-grid">
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <div class="contact-icon">&#128205;</div>
+                    <div>
+                        <h4>Address</h4>
+                        <p>27a Midland Road, Wellingborough NN8 1HF</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">&#128222;</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p><a href="tel:07813588368" style="color:var(--primary)">07813 588368</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">&#9993;</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:modernbeautyse@gmail.com" style="color:var(--primary)">modernbeautyse@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">&#128247;</div>
+                    <div>
+                        <h4>Instagram</h4>
+                        <p><a href="https://instagram.com/modernbeauty.wellingborough" style="color:var(--primary)" target="_blank">@modernbeauty.wellingborough</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">&#128336;</div>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>Monday &ndash; Saturday: 09:30 &ndash; 18:00<br>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container fade-in">
+                <iframe src="https://www.google.com/maps?q=Modern+Beauty+27a+Midland+Road+Wellingborough+NN8+1HF&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Modern Beauty Wellingborough location"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="cta-glow"></div>
+    <div class="container">
+        <h2 class="fade-in">Ready to Feel <span style="color:var(--primary)">Beautiful</span>?</h2>
+        <p class="fade-in">Book your appointment today and treat yourself.</p>
+        <a href="tel:07813588368" class="btn-primary fade-in">Book Now</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-socials">
+            <a href="https://instagram.com/modernbeauty.wellingborough" target="_blank" aria-label="Instagram">&#128247;</a>
+            <a href="mailto:modernbeautyse@gmail.com" aria-label="Email">&#9993;</a>
+            <a href="tel:07813588368" aria-label="Phone">&#128222;</a>
+        </div>
+        <p>&copy; 2026 Modern Beauty Wellingborough. All rights reserved.</p>
+        <p style="margin-top:8px;">Built by <a href="https://twix.tf" target="_blank">Harry</a></p>
+    </div>
+</footer>
+
+<script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+        });
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
