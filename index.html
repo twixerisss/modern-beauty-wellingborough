@@ -4,602 +4,1017 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Beauty Wellingborough | Beauty Salon & Nail Bar</title>
-    <meta name="description" content="Modern Beauty Wellingborough - Your local beauty destination on Midland Road. Nails, brows, LVL lashes, aesthetics, facials, and waxing.">
+    <meta name="description" content="Modern Beauty Wellingborough - Your local beauty destination on Midland Road. Nails, brows, LVL lashes, facials, and waxing.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #E91E63;
-            --primary-light: #F06292;
-            --primary-dark: #C2185B;
-            --bg: #0a0a0a;
-            --bg-light: #111111;
-            --bg-card: #161616;
-            --text: #ffffff;
-            --text-muted: #a0a0a0;
-            --text-dim: #666666;
-            --border: #222222;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --plum: #1A0A1E;
+            --pink: #FF6B9D;
+            --lavender: #C084FC;
+            --white: #FFFFFF;
+            --glass-bg: rgba(255,255,255,0.06);
+            --glass-border: rgba(255,255,255,0.1);
+            --glass-bg-strong: rgba(255,255,255,0.08);
+        }
 
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            background: var(--plum);
+            color: var(--white);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 600; }
 
         a { text-decoration: none; color: inherit; }
 
-        img { max-width: 100%; display: block; }
+        /* ===================== NAVBAR ===================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-        /* NAV */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(10,10,10,0.85);
+        .navbar.scrolled {
+            background: rgba(26, 10, 30, 0.7);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            transition: background 0.3s;
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0.7rem 2rem;
         }
-        nav .container {
-            display: flex; align-items: center; justify-content: space-between;
-            height: 72px;
-        }
+
         .nav-logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.4rem; font-weight: 700;
-        }
-        .nav-logo span { color: var(--primary); }
-        .nav-links { display: flex; gap: 32px; list-style: none; }
-        .nav-links a {
-            font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-cta {
-            background: var(--primary); color: #fff; padding: 10px 24px;
-            border-radius: 8px; font-weight: 600; font-size: 0.9rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(233,30,99,0.3); }
-        .hamburger {
-            display: none; flex-direction: column; gap: 5px; cursor: pointer;
-            background: none; border: none; padding: 4px;
-        }
-        .hamburger span {
-            width: 24px; height: 2px; background: var(--text);
-            transition: transform 0.3s, opacity 0.3s;
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-        /* MOBILE NAV */
-        .mobile-nav {
-            display: none; position: fixed; top: 72px; left: 0; right: 0;
-            background: rgba(10,10,10,0.98); backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 24px; z-index: 999;
-        }
-        .mobile-nav.active { display: block; }
-        .mobile-nav a {
-            display: block; padding: 12px 0; font-size: 1.1rem;
-            color: var(--text-muted); border-bottom: 1px solid var(--border);
-        }
-        .mobile-nav a:last-child { border: none; }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center;
-            position: relative; overflow: hidden; padding-top: 72px;
-        }
-        .hero-glow {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(233,30,99,0.15) 0%, transparent 70%);
-            filter: blur(80px); pointer-events: none;
-        }
-        .hero-content { position: relative; z-index: 2; text-align: center; width: 100%; }
-        .hero-badge {
-            display: inline-block; padding: 8px 20px;
-            background: rgba(233,30,99,0.1); border: 1px solid rgba(233,30,99,0.3);
-            border-radius: 50px; font-size: 0.85rem; font-weight: 500;
-            color: var(--primary-light); margin-bottom: 24px;
-        }
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem); font-weight: 700;
-            line-height: 1.05; margin-bottom: 24px;
-        }
-        .hero h1 .gradient {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--pink), var(--lavender));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .hero p {
-            font-size: 1.2rem; color: var(--text-muted);
-            max-width: 560px; margin: 0 auto 36px;
-        }
-        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .btn-primary {
-            background: var(--primary); color: #fff; padding: 14px 32px;
-            border-radius: 10px; font-weight: 600; font-size: 1rem;
-            transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233,30,99,0.3); }
-        .btn-secondary {
-            background: transparent; color: var(--text); padding: 14px 32px;
-            border-radius: 10px; font-weight: 600; font-size: 1rem;
-            border: 1px solid var(--border); transition: border-color 0.3s; cursor: pointer;
-        }
-        .btn-secondary:hover { border-color: var(--primary); }
 
-        /* STATS */
-        .stats {
-            padding: 60px 0; border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border); background: var(--bg-light);
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
-        .stats-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===================== FLOATING BLOBS ===================== */
+        .blob-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 107, 157, 0.35);
+            animation: floatBlob1 20s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(192, 132, 252, 0.3);
+            animation: floatBlob2 25s ease-in-out infinite;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: rgba(96, 165, 250, 0.25);
+            animation: floatBlob3 22s ease-in-out infinite;
+        }
+
+        .blob-4 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 107, 157, 0.2);
+            animation: floatBlob4 18s ease-in-out infinite;
+        }
+
+        @keyframes floatBlob1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(80px, -60px) scale(1.1); }
+            50% { transform: translate(-40px, 80px) scale(0.95); }
+            75% { transform: translate(60px, 40px) scale(1.05); }
+        }
+
+        @keyframes floatBlob2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-100px, 50px) scale(1.08); }
+            66% { transform: translate(70px, -70px) scale(0.92); }
+        }
+
+        @keyframes floatBlob3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, 80px) scale(1.05); }
+            50% { transform: translate(-80px, -30px) scale(0.97); }
+            75% { transform: translate(30px, -60px) scale(1.1); }
+        }
+
+        @keyframes floatBlob4 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-60px, 60px) scale(1.15); }
+        }
+
+        /* ===================== HERO ===================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 2rem;
+            z-index: 1;
         }
-        .stat-item h3 {
-            font-size: 2.5rem; font-weight: 700; color: var(--primary);
-            margin-bottom: 4px;
-        }
-        .stat-item p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* SECTIONS */
-        section { padding: 100px 0; }
-        .section-label {
-            font-size: 0.85rem; font-weight: 600; color: var(--primary);
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+        .hero-badge {
+            display: inline-block;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--pink);
         }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--pink), var(--lavender));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.7;
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 30px rgba(255, 107, 157, 0.15);
+        }
+
+        .hero-btn:hover {
+            background: rgba(255, 107, 157, 0.2);
+            box-shadow: 0 0 50px rgba(255, 107, 157, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ===================== SECTIONS ===================== */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 5rem 2rem;
+        }
+
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 20px;
-        }
-        .section-desc {
-            color: var(--text-muted); font-size: 1.1rem; max-width: 600px;
-            margin-bottom: 48px;
+            text-align: center;
+            margin-bottom: 3.5rem;
         }
 
-        /* ABOUT */
-        .about-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+        .section-title h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            opacity: 0.6;
+            font-size: 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ===================== STATS (GLASS PILLS) ===================== */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 3rem 2rem;
+        }
+
+        .stat-pill {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            text-align: center;
+            min-width: 180px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .stat-pill .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--pink);
+        }
+
+        .stat-pill .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 0.2rem;
+        }
+
+        /* ===================== SERVICES (GLASS CARDS) ===================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(192, 132, 252, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .service-card.revealed:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card .price {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--pink);
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-top: 0.5rem;
+        }
+
+        /* ===================== GALLERY (INSTAGRAM GRID) ===================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item .heart-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .heart-overlay {
+            opacity: 1;
+        }
+
+        .heart-overlay svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+            opacity: 0.8;
+        }
+
+        .heart-pop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .heart-pop svg {
+            width: 80px;
+            height: 80px;
+            fill: var(--pink);
+            filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.5));
+        }
+
+        .heart-pop.animate {
+            animation: heartBurst 0.8s ease-out forwards;
+        }
+
+        @keyframes heartBurst {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+
+        /* ===================== ABOUT ===================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
             align-items: center;
         }
+
         .about-image {
-            border-radius: 16px; overflow: hidden; aspect-ratio: 4/3;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(255, 107, 157, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            display: block;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .about-text .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .about-text .contact-detail span { opacity: 0.7; }
+
+        .instagram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .instagram-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(131, 58, 180, 0.3);
+        }
+
+        /* ===================== REVIEWS (SPEECH BUBBLES) ===================== */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .review-bubble {
             position: relative;
-        }
-        .about-image img { width: 100%; height: 100%; object-fit: cover; }
-        .about-image::after {
-            content: ''; position: absolute; inset: 0;
-            border: 1px solid rgba(233,30,99,0.2); border-radius: 16px;
-        }
-        .about-text .section-desc { margin-bottom: 24px; }
-        .about-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-        .about-features li {
-            display: flex; align-items: center; gap: 12px;
-            color: var(--text-muted); font-size: 0.95rem;
-        }
-        .about-features li::before {
-            content: ''; width: 8px; height: 8px; border-radius: 50%;
-            background: var(--primary); flex-shrink: 0;
+            padding: 2rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(192, 132, 252, 0.1));
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        /* SERVICES */
-        .services { background: var(--bg-light); }
-        .services-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        .review-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-width: 12px 12px 0 12px;
+            border-style: solid;
+            border-color: rgba(255, 107, 157, 0.1) transparent transparent transparent;
         }
-        .service-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 36px; transition: transform 0.3s, border-color 0.3s;
-        }
-        .service-card:hover { transform: translateY(-4px); border-color: var(--primary); }
-        .service-icon {
-            width: 48px; height: 48px; border-radius: 12px;
-            background: rgba(233,30,99,0.1); display: flex; align-items: center;
-            justify-content: center; font-size: 1.4rem; margin-bottom: 20px;
-        }
-        .service-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
-        .service-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; }
-        .service-price { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
 
-        /* GALLERY */
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+        .review-bubble .stars {
+            color: #FFD700;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
         }
-        .gallery-item {
-            border-radius: 12px; overflow: hidden; aspect-ratio: 1;
-            transition: transform 0.3s;
-        }
-        .gallery-item:hover { transform: scale(1.03); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        .gallery-item:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: 1; }
 
-        /* REVIEWS */
-        .reviews { background: var(--bg-light); }
-        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .review-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 32px;
+        .review-bubble p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            font-style: italic;
+            line-height: 1.7;
         }
-        .review-stars { color: #F1C40F; font-size: 1.1rem; margin-bottom: 16px; }
-        .review-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; font-style: italic; }
-        .review-author { font-weight: 600; font-size: 0.9rem; }
 
-        /* CONTACT */
-        .contact-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+        .review-bubble .reviewer {
+            margin-top: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--lavender);
         }
-        .contact-info { display: flex; flex-direction: column; gap: 24px; }
-        .contact-item { display: flex; gap: 16px; }
-        .contact-icon {
-            width: 48px; height: 48px; border-radius: 12px;
-            background: rgba(233,30,99,0.1); display: flex; align-items: center;
-            justify-content: center; font-size: 1.2rem; flex-shrink: 0;
-        }
-        .contact-item h4 { font-size: 1rem; margin-bottom: 4px; }
-        .contact-item p { color: var(--text-muted); font-size: 0.9rem; }
-        .map-container {
-            border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
-            aspect-ratio: 16/12;
-        }
-        .map-container iframe { width: 100%; height: 100%; border: 0; }
 
-        /* CTA */
-        .cta {
-            background: var(--bg-light); text-align: center; padding: 100px 0;
-            position: relative; overflow: hidden;
+        /* ===================== CONTACT ===================== */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
-        .cta-glow {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(233,30,99,0.1) 0%, transparent 70%);
-            filter: blur(60px); pointer-events: none;
-        }
-        .cta h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; position: relative; }
-        .cta p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 36px; position: relative; }
 
-        /* FOOTER */
-        footer {
-            padding: 48px 0; border-top: 1px solid var(--border);
+        .contact-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
             text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        footer p { color: var(--text-dim); font-size: 0.85rem; }
-        footer a { color: var(--primary); transition: color 0.3s; }
-        footer a:hover { color: var(--primary-light); }
-        .footer-socials { display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; }
-        .footer-socials a {
-            width: 40px; height: 40px; border-radius: 10px;
-            background: var(--bg-card); border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
-            transition: border-color 0.3s;
-        }
-        .footer-socials a:hover { border-color: var(--primary); }
 
-        /* ANIMATIONS */
-        .fade-in {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
         }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* RESPONSIVE */
-        @media (max-width: 968px) {
-            .nav-links, .nav-cta { display: none; }
-            .hamburger { display: flex; }
-            .about-grid, .contact-grid { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .reviews-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery-item:first-child { grid-column: span 2; }
-            .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+        .contact-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
-        @media (max-width: 600px) {
-            .services-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            .gallery-item:first-child { grid-column: span 1; }
+
+        .contact-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .contact-card a {
+            color: var(--pink);
+            transition: opacity 0.3s;
+        }
+
+        .contact-card a:hover { opacity: 0.8; }
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+
+        footer a { color: var(--lavender); }
+        footer a:hover { text-decoration: underline; }
+
+        /* ===================== MOBILE NAV ===================== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(26, 10, 30, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .mobile-menu a:hover { opacity: 1; }
+
+        .mobile-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                gap: 1rem;
+            }
+
+            .stat-pill {
+                min-width: 140px;
+                padding: 0.8rem 1.2rem;
+            }
+
+            section { padding: 3rem 1.5rem; }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-    <div class="container">
-        <a href="#" class="nav-logo">Modern<span>Beauty</span></a>
+    <!-- Floating Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1" id="blob1"></div>
+        <div class="blob blob-2" id="blob2"></div>
+        <div class="blob blob-3" id="blob3"></div>
+        <div class="blob blob-4" id="blob4"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">Modern Beauty</a>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#reviews">Reviews</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="tel:07813588368" class="nav-cta">Call Now</a>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
-<div class="mobile-nav" id="mobileNav">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
-    <a href="tel:07813588368">Call Now</a>
-</div>
+        <button class="nav-toggle" onclick="document.querySelector('.mobile-menu').classList.add('open')" aria-label="Open menu">&#9776;</button>
+    </nav>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-glow"></div>
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">&#9733; 5-Star Rated on Booksy</div>
-            <h1>Modern Beauty For<br><span class="gradient">Modern You</span></h1>
-            <p>Your premier beauty salon and nail bar in Wellingborough. Nails, brows, lashes, facials and more.</p>
-            <div class="hero-buttons">
-                <a href="tel:07813588368" class="btn-primary">Book Now</a>
-                <a href="#services" class="btn-secondary">Our Services</a>
-            </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="this.parentElement.classList.remove('open')" aria-label="Close menu">&times;</button>
+        <a href="#services" onclick="this.parentElement.classList.remove('open')">Services</a>
+        <a href="#gallery" onclick="this.parentElement.classList.remove('open')">Gallery</a>
+        <a href="#about" onclick="this.parentElement.classList.remove('open')">About</a>
+        <a href="#reviews" onclick="this.parentElement.classList.remove('open')">Reviews</a>
+        <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">Beauty Salon & Nail Bar</span>
+        <h1>Modern Beauty Wellingborough</h1>
+        <p>Where beauty meets relaxation. Expert treatments in the heart of Wellingborough.</p>
+        <a href="tel:07813588368" class="hero-btn">Book Now &#8594;</a>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-pill">
+            <div class="stat-value" data-target="5">0</div>
+            <div class="stat-label">Star Rated</div>
+        </div>
+        <div class="stat-pill">
+            <div class="stat-value" data-target="500" data-suffix="+">0</div>
+            <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-pill">
+            <div class="stat-value" data-target="3" data-suffix="+">0</div>
+            <div class="stat-label">Years Experience</div>
         </div>
     </div>
-</section>
 
-<!-- STATS -->
-<section class="stats">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-item fade-in">
-                <h3>5-Star</h3>
-                <p>Rating on Booksy</p>
+    <!-- Services -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Treat yourself to something special</p>
             </div>
-            <div class="stat-item fade-in">
-                <h3>100s</h3>
-                <p>Happy Clients</p>
-            </div>
-            <div class="stat-item fade-in">
-                <h3>Expert</h3>
-                <p>Beauticians</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-    <div class="container">
-        <div class="about-grid">
-            <div class="about-image fade-in">
-                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" alt="Modern Beauty Wellingborough Salon" loading="lazy">
-            </div>
-            <div class="about-text fade-in">
-                <p class="section-label">About Us</p>
-                <h2 class="section-title">Your Local Beauty Destination</h2>
-                <p class="section-desc">Your local beauty destination on Midland Road. Specialising in nails, brows, LVL lashes, aesthetics, facials, and waxing. Book online via Booksy for the ultimate pamper experience.</p>
-                <ul class="about-features">
-                    <li>Professional nail treatments &amp; art</li>
-                    <li>Brow lamination &amp; LVL lash lifts</li>
-                    <li>Luxury facials &amp; skin treatments</li>
-                    <li>Full body waxing services</li>
-                    <li>Book easily via Booksy</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="services">
-    <div class="container">
-        <p class="section-label">Our Services</p>
-        <h2 class="section-title">Treatments We Offer</h2>
-        <p class="section-desc">From nails to facials, we have everything you need to look and feel your best.</p>
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">&#128133;</div>
-                <h3>Gel Manicure</h3>
-                <p>Beautiful, long-lasting gel nails with a flawless finish.</p>
-                <span class="service-price">From &pound;20</span>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">&#128135;</div>
-                <h3>Gel Pedicure</h3>
-                <p>Treat your feet to a luxurious gel pedicure experience.</p>
-                <span class="service-price">From &pound;25</span>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">&#10024;</div>
-                <h3>Brow Lamination</h3>
-                <p>Perfectly shaped, fluffy brows that frame your face beautifully.</p>
-                <span class="service-price">From &pound;25</span>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">&#128065;</div>
-                <h3>LVL Lash Lift</h3>
-                <p>Natural-looking lifted lashes without extensions.</p>
-                <span class="service-price">From &pound;30</span>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">&#129526;</div>
-                <h3>Facial Treatment</h3>
-                <p>Rejuvenating facials tailored to your skin type and needs.</p>
-                <span class="service-price">From &pound;35</span>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-icon">&#127800;</div>
-                <h3>Full Body Wax</h3>
-                <p>Smooth, professional waxing for silky, hair-free skin.</p>
-                <span class="service-price">From &pound;40</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-    <div class="container">
-        <p class="section-label">Gallery</p>
-        <h2 class="section-title">Our Work</h2>
-        <p class="section-desc">A glimpse into the Modern Beauty experience.</p>
-        <div class="gallery-grid">
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" alt="Beauty salon interior" loading="lazy">
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800" alt="Professional nail treatment" loading="lazy">
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800" alt="Beauty treatment" loading="lazy">
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800" alt="Spa treatment" loading="lazy">
-            </div>
-            <div class="gallery-item fade-in">
-                <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800" alt="Beauty experience" loading="lazy">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews" class="reviews">
-    <div class="container">
-        <p class="section-label">Reviews</p>
-        <h2 class="section-title">What Our Clients Say</h2>
-        <p class="section-desc">Don't just take our word for it.</p>
-        <div class="reviews-grid">
-            <div class="review-card fade-in">
-                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>"Amazing nails every single time! The attention to detail is incredible. I won't go anywhere else now."</p>
-                <span class="review-author">Sophie M.</span>
-            </div>
-            <div class="review-card fade-in">
-                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>"Such a relaxing experience from start to finish. The salon is beautiful and the treatments are top notch."</p>
-                <span class="review-author">Emma L.</span>
-            </div>
-            <div class="review-card fade-in">
-                <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p>"The friendliest team in Wellingborough! Always feel so welcome and leave feeling like a million pounds."</p>
-                <span class="review-author">Rachel K.</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-    <div class="container">
-        <p class="section-label">Contact &amp; Hours</p>
-        <h2 class="section-title">Visit Us</h2>
-        <p class="section-desc">We'd love to see you at our Midland Road salon.</p>
-        <div class="contact-grid">
-            <div class="contact-info fade-in">
-                <div class="contact-item">
-                    <div class="contact-icon">&#128205;</div>
-                    <div>
-                        <h4>Address</h4>
-                        <p>27a Midland Road, Wellingborough NN8 1HF</p>
-                    </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">&#128133;</div>
+                    <h3>Gel Manicure</h3>
+                    <div class="price">&pound;20</div>
+                    <p>Flawless, long-lasting gel nails with a mirror finish.</p>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">&#128222;</div>
-                    <div>
-                        <h4>Phone</h4>
-                        <p><a href="tel:07813588368" style="color:var(--primary)">07813 588368</a></p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">&#129526;</div>
+                    <h3>Gel Pedicure</h3>
+                    <div class="price">&pound;25</div>
+                    <p>Pamper your feet with a luxurious gel pedicure.</p>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">&#9993;</div>
-                    <div>
-                        <h4>Email</h4>
-                        <p><a href="mailto:modernbeautyse@gmail.com" style="color:var(--primary)">modernbeautyse@gmail.com</a></p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">&#10024;</div>
+                    <h3>Brow Lamination</h3>
+                    <div class="price">&pound;25</div>
+                    <p>Perfectly shaped, fluffy brows that frame your face.</p>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">&#128247;</div>
-                    <div>
-                        <h4>Instagram</h4>
-                        <p><a href="https://instagram.com/modernbeauty.wellingborough" style="color:var(--primary)" target="_blank">@modernbeauty.wellingborough</a></p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">&#128065;</div>
+                    <h3>LVL Lash Lift</h3>
+                    <div class="price">&pound;30</div>
+                    <p>Natural lash enhancement for wide-open, stunning eyes.</p>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">&#128336;</div>
-                    <div>
-                        <h4>Opening Hours</h4>
-                        <p>Monday &ndash; Saturday: 09:30 &ndash; 18:00<br>Sunday: Closed</p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">&#128142;</div>
+                    <h3>Facial Treatment</h3>
+                    <div class="price">&pound;35</div>
+                    <p>Rejuvenating facial for glowing, radiant skin.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#127800;</div>
+                    <h3>Full Body Wax</h3>
+                    <div class="price">&pound;40</div>
+                    <p>Smooth, silky skin with our gentle waxing service.</p>
                 </div>
             </div>
-            <div class="map-container fade-in">
-                <iframe src="https://www.google.com/maps?q=Modern+Beauty+27a+Midland+Road+Wellingborough+NN8+1HF&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Modern Beauty Wellingborough location"></iframe>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Work</h2>
+                <p>Double-tap to show some love</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" ondblclick="heartAnimation(this)">
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" alt="Beauty salon interior" loading="lazy">
+                    <div class="heart-overlay"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <div class="heart-pop"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                </div>
+                <div class="gallery-item" ondblclick="heartAnimation(this)">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800" alt="Nail art closeup" loading="lazy">
+                    <div class="heart-overlay"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <div class="heart-pop"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                </div>
+                <div class="gallery-item" ondblclick="heartAnimation(this)">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800" alt="Beauty treatment" loading="lazy">
+                    <div class="heart-overlay"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <div class="heart-pop"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                </div>
+                <div class="gallery-item" ondblclick="heartAnimation(this)">
+                    <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800" alt="Salon atmosphere" loading="lazy">
+                    <div class="heart-overlay"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <div class="heart-pop"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                </div>
+                <div class="gallery-item" ondblclick="heartAnimation(this)">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800" alt="Lash treatment" loading="lazy">
+                    <div class="heart-overlay"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <div class="heart-pop"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                </div>
+                <div class="gallery-item" ondblclick="heartAnimation(this)">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800" alt="Skincare treatment" loading="lazy">
+                    <div class="heart-overlay"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <div class="heart-pop"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CTA -->
-<section class="cta">
-    <div class="cta-glow"></div>
-    <div class="container">
-        <h2 class="fade-in">Ready to Feel <span style="color:var(--primary)">Beautiful</span>?</h2>
-        <p class="fade-in">Book your appointment today and treat yourself.</p>
-        <a href="tel:07813588368" class="btn-primary fade-in">Book Now</a>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-    <div class="container">
-        <div class="footer-socials">
-            <a href="https://instagram.com/modernbeauty.wellingborough" target="_blank" aria-label="Instagram">&#128247;</a>
-            <a href="mailto:modernbeautyse@gmail.com" aria-label="Email">&#9993;</a>
-            <a href="tel:07813588368" aria-label="Phone">&#128222;</a>
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" alt="Modern Beauty Salon">
+                </div>
+                <div class="about-text">
+                    <h2>About Modern Beauty</h2>
+                    <p>Located in the heart of Wellingborough on Midland Road, Modern Beauty is your go-to destination for all things beauty. Our talented team provides expert nail, lash, brow, facial, and waxing services in a relaxing and welcoming environment.</p>
+                    <p>We use only premium products and stay up to date with the latest beauty trends to give you the best possible experience.</p>
+                    <div class="contact-detail">&#128205; <span>27a Midland Road, Wellingborough NN8 1HF</span></div>
+                    <div class="contact-detail">&#128222; <span><a href="tel:07813588368" style="color: var(--pink);">07813 588368</a></span></div>
+                    <div class="contact-detail">&#128231; <span><a href="mailto:modernbeautyse@gmail.com" style="color: var(--pink);">modernbeautyse@gmail.com</a></span></div>
+                    <div class="contact-detail">&#128338; <span>Mon-Sat 09:30 - 18:00 | Sun Closed</span></div>
+                    <a href="https://instagram.com/modernbeauty.wellingborough" target="_blank" rel="noopener" class="instagram-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        @modernbeauty.wellingborough
+                    </a>
+                </div>
+            </div>
         </div>
-        <p>&copy; 2026 Modern Beauty Wellingborough. All rights reserved.</p>
-        <p style="margin-top:8px;">Built by <a href="https://twix.tf" target="_blank">Harry</a></p>
-    </div>
-</footer>
+    </section>
 
-<script>
-    // Hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        mobileNav.classList.toggle('active');
-    });
-    mobileNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            mobileNav.classList.remove('active');
-        });
-    });
+    <!-- Reviews -->
+    <section id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Real reviews from real clients</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-bubble">
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p>"Amazing nails every time! The attention to detail is incredible and they always make me feel so pampered."</p>
+                    <div class="reviewer">- Sarah T.</div>
+                </div>
+                <div class="review-bubble">
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p>"The most relaxing facial I've had. My skin was absolutely glowing afterwards. Can't recommend enough!"</p>
+                    <div class="reviewer">- Emma K.</div>
+                </div>
+                <div class="review-bubble">
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p>"The girls are so friendly and talented. Always leave feeling like a million pounds. My go-to salon!"</p>
+                    <div class="reviewer">- Rachel M.</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Scroll animations
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>We'd love to hear from you</p>
+            </div>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="icon">&#128222;</div>
+                    <h3>Call Us</h3>
+                    <p><a href="tel:07813588368">07813 588368</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="icon">&#128231;</div>
+                    <h3>Email Us</h3>
+                    <p><a href="mailto:modernbeautyse@gmail.com">modernbeautyse@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="icon">&#128205;</div>
+                    <h3>Visit Us</h3>
+                    <p>27a Midland Road<br>Wellingborough NN8 1HF</p>
+                </div>
+                <div class="contact-card">
+                    <div class="icon">&#128338;</div>
+                    <h3>Opening Hours</h3>
+                    <p>Mon-Sat: 09:30 - 18:00<br>Sun: Closed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Modern Beauty Wellingborough &copy; 2026. <a href="https://twix.tf" target="_blank" rel="noopener">Built by Harry</a></p>
+    </footer>
+
+    <script>
+        // Randomize blob starting positions
+        (function() {
+            const blobs = document.querySelectorAll('.blob');
+            const positions = [
+                { top: '5%', left: '10%' },
+                { top: '40%', left: '70%' },
+                { top: '60%', left: '20%' },
+                { top: '20%', left: '80%' }
+            ];
+            blobs.forEach((blob, i) => {
+                const pos = positions[i] || { top: Math.random() * 80 + '%', left: Math.random() * 80 + '%' };
+                blob.style.top = pos.top;
+                blob.style.left = pos.left;
+            });
+        })();
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
 
+            // Parallax on blobs
+            const scrollY = window.scrollY;
+            const blobs = document.querySelectorAll('.blob');
+            blobs.forEach((blob, i) => {
+                const speed = 0.02 + i * 0.01;
+                blob.style.transform = `translateY(${-scrollY * speed}px)`;
+            });
+        });
+
+        // Heart double-click animation
+        function heartAnimation(el) {
+            const heart = el.querySelector('.heart-pop');
+            heart.classList.remove('animate');
+            void heart.offsetWidth;
+            heart.classList.add('animate');
+        }
+
+        // Staggered service card reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cards = entry.target.querySelectorAll('.service-card');
+                    cards.forEach((card, i) => {
+                        setTimeout(() => {
+                            card.classList.add('revealed');
+                        }, i * 100);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const servicesGrid = document.querySelector('.services-grid');
+        if (servicesGrid) observer.observe(servicesGrid);
+
+        // Counter animation for stats
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statValues = entry.target.querySelectorAll('.stat-value');
+                    statValues.forEach(stat => {
+                        const target = parseInt(stat.dataset.target);
+                        const suffix = stat.dataset.suffix || '';
+                        let current = 0;
+                        const increment = target / 40;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = Math.floor(current) + suffix;
+                        }, 30);
+                    });
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) statObserver.observe(statsSection);
+
+        // General reveal animation for other sections
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.review-bubble, .contact-card, .about-content').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            revealObserver.observe(el);
+        });
+    </script>
 </body>
 </html>
